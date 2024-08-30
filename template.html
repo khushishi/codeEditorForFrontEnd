@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+          <title></title>
+            <style>
+                *{
+                    margin:0pc;
+                    padding:0%;
+                }
+                body{
+                    width:100%;
+                    display:flex;
+                    height:10vh;
+                    background-color: pink;
+                    
+                }
+                .part1{
+                    flex-basis:50%;
+                    background-color: bisque;
+                    height:100vh;
+                    display:flex;
+                    flex-direction: column;
+                }
+                .part2{
+                    flex-basis:50%;
+                }
+                .subpart{
+                    flex-basis:33%;
+                    background-color: rgb(241, 135, 184);  
+                }
+                .part1 .subpart textarea{
+                    width:99%;
+                    height:90%;
+                    border:none;
+                }
+                .part2 label{
+                    display:block;
+                    padding:10px;
+                    background-color: hotpink;
+                    color:white;
+
+                }
+                .part2 iframe{
+                    display:block;
+                    width:100%;
+                    height:90vh;
+                    box-sizing: border-box;
+                    border:none;
+                }
+                
+            </style>
+    </head>
+    <body>
+       <div class="part1">
+           <div class="subpart">
+            <label>HTML</label>
+            <textarea></textarea>
+           </div>
+           <div class="subpart">
+            <label>CSS</label>
+            <textarea></textarea>
+           </div>
+           <div class="subpart">
+            <label>JAVASCRIPT</label>
+            <textarea></textarea>
+           </div>
+           </div>
+       <div class="part2">
+        <label>Output</label>
+        <iframe id="output"></iframe>
+       </div>
+    </body>
+    <script>
+        let output=document.querySelector("#output");
+        let allInput=document.querySelectorAll(".part1 textarea");
+        let htmlCode,cssCode,jsCode='';
+        allInput.forEach((element,index)=> {
+            element.addEventListener("keyup",()=>{
+                if(index==0){
+                    htmlCode=element.value;
+
+                }
+                if(index==1){
+                    cssCode=element.value;
+
+                }
+                if(index==2){
+                    jsCode=element.value;
+
+                }
+                output.contentDocument.body.innerHTML=htmlCode;
+                output.contentDocument.head.innerHTML=`<style>${cssCode}</style>`;
+                output.contentWindow.eval(jsCode);
+            })
+
+            
+        })
+    </script>
+</html>
+
